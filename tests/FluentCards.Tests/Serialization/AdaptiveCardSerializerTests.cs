@@ -217,7 +217,8 @@ public class AdaptiveCardSerializerTests
 
         // Assert
         Assert.NotNull(card);
-        Assert.Single(card.Body!);
+        Assert.NotNull(card.Body);
+        Assert.Single(card.Body);
         var textBlock = card.Body[0] as TextBlock;
         Assert.Equal("Stream Test", textBlock?.Text);
     }

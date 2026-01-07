@@ -26,7 +26,7 @@ public static class AdaptiveCardSerializer
             TypeInfoResolver = FluentCardsJsonContext.Default
         };
         
-        return JsonSerializer.Serialize(card, options);
+        return JsonSerializer.Serialize(card, FluentCardsJsonContext.Default.AdaptiveCard);
     }
     
     /// <summary>

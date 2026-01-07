@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -6,6 +7,7 @@ namespace FluentCards.Serialization;
 /// <summary>
 /// Custom JSON converter for RichTextBlock.Inlines that can contain strings or TextRun objects.
 /// </summary>
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
 public class InlinesConverter : JsonConverter<List<object>?>
 {
     /// <summary>
@@ -35,7 +37,7 @@ public class InlinesConverter : JsonConverter<List<object>?>
             }
             else if (reader.TokenType == JsonTokenType.StartObject)
             {
-                var textRun = JsonSerializer.Deserialize<TextRun>(ref reader, options);
+                var textRun = JsonSerializer.Deserialize<TextRun>(ref reader, FluentCardsJsonContext.Default.TextRun);
                 if (textRun != null)
                     result.Add(textRun);
             }
@@ -66,7 +68,7 @@ public class InlinesConverter : JsonConverter<List<object>?>
             }
             else if (item is TextRun textRun)
             {
-                JsonSerializer.Serialize(writer, textRun, options);
+                JsonSerializer.Serialize(writer, textRun, FluentCardsJsonContext.Default.TextRun);
             }
         }
         writer.WriteEndArray();

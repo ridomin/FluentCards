@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -6,6 +7,7 @@ namespace FluentCards;
 /// <summary>
 /// JSON converter for the fallback property which can be either "drop" or an AdaptiveElement.
 /// </summary>
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
 public class FallbackConverter : JsonConverter<object?>
 {
     /// <summary>
@@ -19,7 +21,7 @@ public class FallbackConverter : JsonConverter<object?>
         }
         else if (reader.TokenType == JsonTokenType.StartObject)
         {
-            return JsonSerializer.Deserialize<AdaptiveElement>(ref reader, options);
+            return JsonSerializer.Deserialize<AdaptiveElement>(ref reader, FluentCardsJsonContext.Default.AdaptiveElement);
         }
         return null;
     }
@@ -35,7 +37,7 @@ public class FallbackConverter : JsonConverter<object?>
         }
         else if (value is AdaptiveElement element)
         {
-            JsonSerializer.Serialize(writer, element, options);
+            JsonSerializer.Serialize(writer, element, FluentCardsJsonContext.Default.AdaptiveElement);
         }
         else
         {

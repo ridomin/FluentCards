@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -6,6 +7,7 @@ namespace FluentCards.Serialization;
 /// <summary>
 /// Custom JSON converter for ToggleVisibilityAction.TargetElements that can contain strings or TargetElement objects.
 /// </summary>
+[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
 public class TargetElementListConverter : JsonConverter<List<object>?>
 {
     /// <summary>
@@ -35,7 +37,7 @@ public class TargetElementListConverter : JsonConverter<List<object>?>
             }
             else if (reader.TokenType == JsonTokenType.StartObject)
             {
-                var element = JsonSerializer.Deserialize<TargetElement>(ref reader, options);
+                var element = JsonSerializer.Deserialize<TargetElement>(ref reader, FluentCardsJsonContext.Default.TargetElement);
                 if (element != null)
                     result.Add(element);
             }
@@ -66,7 +68,7 @@ public class TargetElementListConverter : JsonConverter<List<object>?>
             }
             else if (item is TargetElement element)
             {
-                JsonSerializer.Serialize(writer, element, options);
+                JsonSerializer.Serialize(writer, element, FluentCardsJsonContext.Default.TargetElement);
             }
         }
         writer.WriteEndArray();
