@@ -1,0 +1,49 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "src/FluentCards/FluentCards.csproj"
+          ],
+          "exclude": [
+            "**/obj/**",
+            "**/bin/**"
+          ]
+        }
+      ],
+      "dest": "api",
+      "properties": {
+        "TargetFramework": "net8.0"
+      }
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "index.md"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "**/bin/**"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "FluentCards Documentation",
+      "_enableSearch": true,
+      "_gitContribute": {
+        "repo": "https://github.com/yourusername/FluentCards",
+        "branch": "main"
+      },
+      "_appLogoPath": "images/logo.png",
+      "_appFaviconPath": "images/favicon.ico",
+      "_gitUrlPattern": "github"
+    },
+    "overwrite": [],
+    "externalReference": []
+  }
+}
