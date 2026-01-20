@@ -56,3 +56,6 @@ nunit-*.xml
 # BenchmarkDotNet
 BenchmarkDotNet.Artifacts/
 *.bench
+
+_site/
+api/
