@@ -20,12 +20,12 @@ jobs:
     permissions:
       contents: read
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 0
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -39,7 +39,7 @@ jobs:
       run: dotnet test --configuration ${{ env.CONFIGURATION }} --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         directory: ./coverage
         fail_ci_if_error: false
@@ -49,12 +49,12 @@ jobs:
     permissions:
       contents: read
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 0
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -70,12 +70,12 @@ jobs:
     permissions:
       contents: read
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 0
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -83,7 +83,7 @@ jobs:
       run: dotnet run --project benchmarks/FluentCards.Benchmarks/FluentCards.Benchmarks.csproj -c Release -- --filter "*" --exporters json
 
     - name: Upload benchmark results
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: benchmark-results
         path: BenchmarkDotNet.Artifacts/
@@ -94,12 +94,12 @@ jobs:
     permissions:
       contents: read
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 0
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -107,13 +107,13 @@ jobs:
       run: dotnet pack src/FluentCards/FluentCards.csproj --configuration Release --output ./nupkg
 
     - name: Upload NuGet package
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: nuget-package
         path: ./nupkg/*.nupkg
 
     - name: Upload Symbol package
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: symbol-package
         path: ./nupkg/*.snupkg
@@ -127,19 +127,19 @@ jobs:
       contents: read
     steps:
     - name: Download NuGet package
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: nuget-package
         path: ./nupkg
 
     - name: Download Symbol package
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: symbol-package
         path: ./nupkg
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
