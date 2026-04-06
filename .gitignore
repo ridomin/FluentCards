@@ -69,6 +69,9 @@ node/*/dist/
 dotnet/scripts/node_modules/
 dotnet/scripts/package-lock.json
 
+# Documentation output
+_site/
+api/
 # Go
 go/coverage.out
 go/coverage.html

@@ -1,0 +1,30 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": ["src/FluentCards/FluentCards.csproj"],
+          "src": "."
+        }
+      ],
+      "dest": "api",
+      "disableGitFeatures": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": ["api/**.yml", "api/index.md"]
+      },
+      {
+        "files": ["toc.yml"]
+      }
+    ],
+    "dest": "../_site/api/dotnet",
+    "globalMetadata": {
+      "_appName": "FluentCards",
+      "_appTitle": "FluentCards (.NET)",
+      "_enableSearch": true
+    }
+  }
+}
