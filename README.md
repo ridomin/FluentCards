@@ -2,7 +2,9 @@
 
 [![CI](https://github.com/rido-min/FluentCards/actions/workflows/ci.yml/badge.svg)](https://github.com/rido-min/FluentCards/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/FluentCards.svg)](https://www.nuget.org/packages/FluentCards)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/FluentCards.svg)](https://www.nuget.org/packages/FluentCards)
+[![npm](https://img.shields.io/badge/npm-fluent--cards-blue)](https://www.npmjs.com/package/fluent-cards)
+[![PyPI](https://img.shields.io/pypi/v/fluent-cards.svg)](https://pypi.org/project/fluent-cards/)
+[![Go Reference](https://pkg.go.dev/badge/github.com/rido-min/FluentCards/go/fluentcards.svg)](https://pkg.go.dev/github.com/rido-min/FluentCards/go/fluentcards)
 
 A multi-language library for building [Adaptive Cards](https://adaptivecards.io/) using a fluent builder pattern with strong typing and schema validation.
 
@@ -11,8 +13,8 @@ A multi-language library for building [Adaptive Cards](https://adaptivecards.io/
 | Language | Folder | Package |
 |----------|--------|---------|
 | C# / .NET 8 | [`dotnet/`](dotnet/) | [![NuGet](https://img.shields.io/nuget/v/FluentCards.svg)](https://www.nuget.org/packages/FluentCards) |
-| TypeScript / Node.js | [`node/`](node/) | npm (coming soon) |
-| Python | [`python/`](python/) | PyPI (coming soon) |
+| TypeScript / Node.js | [`node/`](node/) | [![npm](https://img.shields.io/badge/npm-fluent--cards-blue)](https://www.npmjs.com/package/fluent-cards) |
+| Python | [`python/`](python/) | [![PyPI](https://img.shields.io/pypi/v/fluent-cards.svg)](https://pypi.org/project/fluent-cards/) |
 | Go | [`go/`](go/) | [![Go Reference](https://pkg.go.dev/badge/github.com/rido-min/FluentCards/go/fluentcards.svg)](https://pkg.go.dev/github.com/rido-min/FluentCards/go/fluentcards) |
 
 ## Quick Start
@@ -66,18 +68,18 @@ pip install fluent-cards
 ```
 
 ```python
-from fluent_cards import AdaptiveCardBuilder, TextSize, TextWeight
+from fluent_cards import AdaptiveCardBuilder, TextSize, TextWeight, to_json
 
 card = (AdaptiveCardBuilder.create()
     .with_version('1.5')
     .add_text_block(lambda tb: tb
         .with_text('Hello, FluentCards!')
-        .with_size(TextSize.LARGE)
-        .with_weight(TextWeight.BOLDER)
+        .with_size(TextSize.Large)
+        .with_weight(TextWeight.Bolder)
         .with_wrap(True))
     .build())
 
-print(card.to_json())
+print(to_json(card))
 ```
 
 ### Go
