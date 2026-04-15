@@ -45,3 +45,16 @@ Fixed all 8 gaps from Keaton's TS schema audit plus the enum casing fix:
 - `CaptionSource` exported from `index.ts`.
 - Library source typechecks clean. All 247 tests pass.
 - Pre-existing test typecheck issues (68 errors from `values.includes('literal')` pattern in enum tests) were not introduced by these changes.
+
+### 2025-07-23 — Issue #75: toObject() for native object serialization
+
+- Added `toObject(card)` to `serialization.ts` — returns a clean `AdaptiveCard` object with all `undefined` values recursively stripped via a `stripUndefined` helper.
+- Exported from `index.ts` alongside `toJson` and `fromJson`.
+- 6 new tests in `serialization.test.ts` — stripping, immutability, array preservation, parity with `JSON.parse(toJson())`.
+- Updated `program.ts` sample to demonstrate `toObject()`.
+- **Key pattern:** Tests resolve imports from `dist/` (CJS via tsx), so `npm run build` must run before `npm test` when adding new exports. The workspace `npm install` does not auto-build.
+- All 283 tests pass. Typecheck clean.
+
+### 2026-04-15 — Native Object Serialization (#75) — Cross-Team Coordination
+
+Collaborated with McManus (.NET), Hockney (Python), and Verbal (Tester) on Issue #75. TypeScript implementation complete with 6 new tests in `native-object.test.ts`. All three core ports (dotnet, node, python) now provide native object methods: .NET `ToJsonElement()`/`ToJsonNode()`, TypeScript `toObject()`, Python `to_dict()`. Test parity maintained — all ports cover identical semantic scenarios (round-trip, equivalence, complex card, minimal card, enum strings, field stripping). Verbal's cross-port test framework ensures all implementations produce bit-identical results to `JSON.parse(toJson())`. Go skipped pending architecture review (`go:needs-research`).
